@@ -9,7 +9,11 @@ public class Enfermeiro
     private String sexo;
     private String login;
     private String senha;
-
+    
+    public Enfermeiro(){
+        
+    }
+    
     public Enfermeiro(String id, String nome, Calendar nascimento, String sexo, String login, String senha) {
         this.id = id;
         this.nome = nome;

@@ -13,7 +13,33 @@ public class ConsultaController
     {
         daoConsulta = new ConsultaDAO();
     }
-
+    
+    
+    public boolean add(Consulta consulta) throws SQLException{
+        return daoConsulta.add(consulta);
+    }
+    
+    public boolean remove(String id) throws SQLException{
+        Consulta tmp = new Consulta();
+        tmp.setId(id);
+        return daoConsulta.remove(tmp);
+    }
+    
+    public boolean update(Consulta consulta) throws SQLException{
+        return daoConsulta.update(consulta);
+    }
+    
+    public List<Consulta> selectAll() throws SQLException 
+    {
+        return daoConsulta.selectAll();
+    }
+    
+    public List<Consulta> searchBy(String campo, String valor) throws SQLException 
+    {
+        return daoConsulta.searchBy(campo, valor);
+    }
+    
+    
     public boolean add(String id, String enfermeiro, String paciente, Calendar datahora, double massaCorporal, double circAbdominal, double altura, double glicemia, String pressaoArterial, int respiracao, double temperatura, int batimentoCardio) throws SQLException 
     {
         return daoConsulta.add(new Consulta(id, enfermeiro, paciente, datahora, massaCorporal, circAbdominal, altura, glicemia, pressaoArterial, respiracao, temperatura, batimentoCardio));
@@ -29,13 +55,7 @@ public class ConsultaController
         return daoConsulta.update(new Consulta(id, enfermeiro, paciente, datahora, massaCorporal, circAbdominal, altura, glicemia, pressaoArterial, respiracao, temperatura, batimentoCardio));
     }
 
-    public List<Consulta> selectAll() throws SQLException 
-    {
-        return daoConsulta.selectAll();
-    }
+    
 
-    public List<Consulta> searchBySomething(String tipo, String coisa) throws SQLException 
-    {
-        return daoConsulta.searchBySomething(tipo, coisa);
-    }
+    
 }

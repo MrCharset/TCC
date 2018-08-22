@@ -1,31 +1,24 @@
 package Model;
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.Calendar;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultaDAO 
-{ 
-    private final Connection con;
-    
-    public ConsultaDAO() throws SQLException
-    { 
-        con = ConnectionFactory.getConnection();
-    } 
+public class ConsultaDAO<Object> extends DAO<Consulta> {
 
-    public boolean add(Consulta modelo) throws SQLException
-    {
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    public ConsultaDAO() throws SQLException {
+        super();
+    }
+
+    @Override
+    public boolean add(Consulta modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        }
-        else
-        {
+        } else {
             PreparedStatement stmt = con.prepareStatement("insert into consulta (id, enfermeiro, paciente, datahora, massacorporal, circabdominal, altura, glicemia, pressaoarterial, respiracao, temperatura, batimentocardio) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, modelo.getId());
             stmt.setString(2, modelo.getEnfermeiro());
@@ -42,26 +35,22 @@ public class ConsultaDAO
             stmt.setInt(12, modelo.getBatimentoCardio());
             return stmt.executeUpdate() != 0;
         }
-    } 
+    }
 
-    public boolean remove(Consulta modelo) throws SQLException
-    {
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    @Override
+    public boolean remove(Consulta modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             PreparedStatement stmt = con.prepareStatement("delete from consulta where id = ?");
             stmt.setString(1, modelo.getId());
             return stmt.execute();
-        }
-        else
-        {
+        } else {
             return false;
         }
-    } 
+    }
 
-    public boolean update(Consulta modelo) throws SQLException
-    {
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    @Override
+    public boolean update(Consulta modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             PreparedStatement stmt = con.prepareStatement("update consulta set enfermeiro = ?, paciente = ?, datahora = ?, massacorporal = ?, circabdominal = ?, altura = ?, glicemia = ?, pressaoarterial = ?, respiracao = ?, temperatura = ?, batimentocardio = ? where id = ?");
             stmt.setString(1, modelo.getEnfermeiro());
             stmt.setString(2, modelo.getPaciente());
@@ -77,48 +66,17 @@ public class ConsultaDAO
             stmt.setInt(11, modelo.getBatimentoCardio());
             stmt.setString(12, modelo.getId());
             return stmt.executeUpdate() != 0;
-        }
-        else
-        {
+        } else {
             return false;
         }
-    } 
+    }
 
-    public List<Consulta> selectAll() throws SQLException
-    { 
-        ArrayList <Consulta> lista = new ArrayList<>();
+    @Override
+    public List<Consulta> selectAll() throws SQLException {
+        ArrayList<Consulta> lista = new ArrayList<>();
         PreparedStatement stmt = con.prepareStatement("select * from consulta");
         ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
-            String id = rs.getString("id");
-            String enfermeiro = rs.getString("enfermeiro");
-            String paciente = rs.getString("paciente");
-            Calendar data1 = Calendar.getInstance();
-            data1.setTimeInMillis(rs.getTimestamp("datahora").getTime());
-            Calendar datahora = data1;
-            double massaCorporal = rs.getDouble("massacorporal");
-            double circAbdominal = rs.getDouble("circabdominal");
-            double altura = rs.getDouble("altura");
-            double glicemia = rs.getDouble("glicemia");
-            String pressaoArterial = rs.getString("pressaoarterial");
-            int respiracao = rs.getInt("respiracao");
-            double temperatura = rs.getDouble("temperatura");
-            int batimentoCardio = rs.getInt("batimentocardio");
-            Consulta obj = new Consulta(id, enfermeiro, paciente, datahora, massaCorporal, circAbdominal, altura, glicemia, pressaoArterial, respiracao, temperatura, batimentoCardio);
-            lista.add(obj);
-        }
-        return lista;
-    } 
-
-    public List<Consulta> searchBySomething(String tipo, String coisa) throws SQLException
-    { 
-        ArrayList <Consulta> lista = new ArrayList<>();
-        PreparedStatement stmt = con.prepareStatement("select * from consulta where " + tipo + " = ?");
-        stmt.setString(1, coisa);
-        ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
+        while (rs.next()) {
             String id = rs.getString("id");
             String enfermeiro = rs.getString("enfermeiro");
             String paciente = rs.getString("paciente");
@@ -138,4 +96,32 @@ public class ConsultaDAO
         }
         return lista;
     }
+
+    @Override
+    public List<Consulta> searchBy(String campo, String valor) throws SQLException {
+        ArrayList<Consulta> lista = new ArrayList<>();
+        PreparedStatement stmt = con.prepareStatement("select * from consulta where " + campo + " = ?");
+        stmt.setString(1, valor);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            String id = rs.getString("id");
+            String enfermeiro = rs.getString("enfermeiro");
+            String paciente = rs.getString("paciente");
+            Calendar data1 = Calendar.getInstance();
+            data1.setTimeInMillis(rs.getTimestamp("datahora").getTime());
+            Calendar datahora = data1;
+            double massaCorporal = rs.getDouble("massacorporal");
+            double circAbdominal = rs.getDouble("circabdominal");
+            double altura = rs.getDouble("altura");
+            double glicemia = rs.getDouble("glicemia");
+            String pressaoArterial = rs.getString("pressaoarterial");
+            int respiracao = rs.getInt("respiracao");
+            double temperatura = rs.getDouble("temperatura");
+            int batimentoCardio = rs.getInt("batimentocardio");
+            Consulta obj = new Consulta(id, enfermeiro, paciente, datahora, massaCorporal, circAbdominal, altura, glicemia, pressaoArterial, respiracao, temperatura, batimentoCardio);
+            lista.add(obj);
+        }
+        return lista;
+    }
+
 }

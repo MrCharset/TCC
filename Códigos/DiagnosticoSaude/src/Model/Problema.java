@@ -1,7 +1,7 @@
 package Model;
 
-public class Problema 
-{ 
+public class Problema {
+
     private String id;
     private String nome;
     private String detalhes;
@@ -13,36 +13,40 @@ public class Problema
         this.detalhes = detalhes;
         this.descricao = descricao;
     }
-    
-    public String getId() { 
+
+    public Problema() {
+
+    }
+
+    public String getId() {
         return this.id;
-    } 
+    }
 
-    public void setId(String id) { 
+    public void setId(String id) {
         this.id = id;
-    } 
+    }
 
-    public String getNome() { 
+    public String getNome() {
         return this.nome;
-    } 
+    }
 
-    public void setNome(String nome) { 
+    public void setNome(String nome) {
         this.nome = nome;
-    } 
+    }
 
-    public String getDetalhes() { 
+    public String getDetalhes() {
         return this.detalhes;
-    } 
+    }
 
-    public void setDetalhes(String detalhes) { 
+    public void setDetalhes(String detalhes) {
         this.detalhes = detalhes;
-    } 
+    }
 
-    public String getDescricao() { 
+    public String getDescricao() {
         return this.descricao;
-    } 
+    }
 
-    public void setDescricao(String descricao) { 
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 }

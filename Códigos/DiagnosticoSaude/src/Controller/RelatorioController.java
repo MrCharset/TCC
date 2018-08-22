@@ -1,41 +1,51 @@
 package Controller;
+
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import Model.Relatorio;
 import Model.RelatorioDAO;
 
-public class RelatorioController 
-{
+public class RelatorioController {
+
     private final RelatorioDAO daoRelatorio;
 
-    public RelatorioController() throws SQLException 
-    {
+    public RelatorioController() throws SQLException {
         daoRelatorio = new RelatorioDAO();
     }
 
-    public boolean add(String id, String conteudo, Calendar datahora, String paciente) throws SQLException 
-    {
-        return daoRelatorio.add(new Relatorio(id, conteudo, datahora, paciente));
+    public boolean add(Relatorio rel) throws SQLException {
+        return daoRelatorio.add(rel);
     }
 
-    public boolean remove(String id, String conteudo, Calendar datahora, String paciente) throws SQLException 
-    {
-        return daoRelatorio.remove(new Relatorio(id, conteudo, datahora, paciente));
+    public boolean remove(String id) throws SQLException {
+        Relatorio tmp = new Relatorio();
+        tmp.setId(id);
+        return daoRelatorio.remove(tmp);
     }
 
-    public boolean update(String id, String conteudo, Calendar datahora, String paciente) throws SQLException 
-    {
-        return daoRelatorio.update(new Relatorio(id, conteudo, datahora, paciente));
+    public boolean update(Relatorio rel) throws SQLException {
+        return daoRelatorio.update(rel);
     }
 
-    public List<Relatorio> selectAll() throws SQLException 
-    {
+    public List<Relatorio> selectAll() throws SQLException {
         return daoRelatorio.selectAll();
     }
 
-    public List<Relatorio> searchBySomething(String tipo, String coisa) throws SQLException 
-    {
-        return daoRelatorio.searchBySomething(tipo, coisa);
+    public List<Relatorio> searchBy(String campo, String valor) throws SQLException {
+        return daoRelatorio.searchBy(campo, valor);
     }
+
+    public boolean add(String id, String conteudo, Calendar datahora, String paciente) throws SQLException {
+        return daoRelatorio.add(new Relatorio(id, conteudo, datahora, paciente));
+    }
+
+    public boolean remove(String id, String conteudo, Calendar datahora, String paciente) throws SQLException {
+        return daoRelatorio.remove(new Relatorio(id, conteudo, datahora, paciente));
+    }
+
+    public boolean update(String id, String conteudo, Calendar datahora, String paciente) throws SQLException {
+        return daoRelatorio.update(new Relatorio(id, conteudo, datahora, paciente));
+    }
+
 }

@@ -1,5 +1,6 @@
+
 package Model;
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -8,23 +9,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PacienteDAO 
-{ 
-    private final Connection con;
-    
-    public PacienteDAO() throws SQLException
-    { 
-        con = ConnectionFactory.getConnection();
+public class PacienteDAO<Object> extends DAO<Paciente> {
+
+    public PacienteDAO() throws SQLException {
+        super();
     }
 
-    public boolean add(Paciente modelo) throws SQLException
-    { 
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    @Override
+    public boolean add(Paciente modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        }
-        else
-        {
+        } else {
             PreparedStatement stmt = con.prepareStatement("insert into paciente (id, nome, nascimento, sexo, enfermeiro) values (?, ?, ?, ?, ?)");
             stmt.setString(1, modelo.getId());
             stmt.setString(2, modelo.getNome());
@@ -34,26 +29,22 @@ public class PacienteDAO
             stmt.setString(5, modelo.getEnfermeiro());
             return stmt.executeUpdate() != 0;
         }
-    } 
+    }
 
-    public boolean remove(Paciente modelo) throws SQLException
-    { 
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    @Override
+    public boolean remove(Paciente modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             PreparedStatement stmt = con.prepareStatement("delete from paciente where id = ?");
             stmt.setString(1, modelo.getId());
             return stmt.execute();
-        }
-        else
-        {
+        } else {
             return false;
-        }      
-    } 
+        }
+    }
 
-    public boolean update(Paciente modelo) throws SQLException
-    {
-        if (searchBySomething("id", modelo.getId()).size() > 0)
-        {
+    @Override
+    public boolean update(Paciente modelo) throws SQLException {
+        if (searchBy("id", modelo.getId()).size() > 0) {
             PreparedStatement stmt = con.prepareStatement("update paciente set nome = ?, nascimento = ?, sexo = ?, enfermeiro = ? where id = ?");
             stmt.setString(1, modelo.getNome());
             Calendar tmp2 = modelo.getNascimento();
@@ -62,20 +53,17 @@ public class PacienteDAO
             stmt.setString(4, modelo.getEnfermeiro());
             stmt.setString(5, modelo.getId());
             return stmt.executeUpdate() != 0;
-        }
-        else
-        {
+        } else {
             return false;
         }
-    } 
+    }
 
-    public List<Paciente> selectAll() throws SQLException
-    { 
-        ArrayList <Paciente> lista = new ArrayList<>();
+    @Override
+    public List<Paciente> selectAll() throws SQLException {
+        ArrayList<Paciente> lista = new ArrayList<>();
         PreparedStatement stmt = con.prepareStatement("select * from paciente");
         ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
+        while (rs.next()) {
             String id = rs.getString("id");
             String nome = rs.getString("nome");
             Calendar data1 = Calendar.getInstance();
@@ -87,16 +75,15 @@ public class PacienteDAO
             lista.add(obj);
         }
         return lista;
-    } 
+    }
 
-    public List<Paciente> searchBySomething(String tipo, String coisa) throws SQLException
-    { 
-        ArrayList <Paciente> lista = new ArrayList<>();
+    @Override
+    public List<Paciente> searchBy(String tipo, String coisa) throws SQLException {
+        ArrayList<Paciente> lista = new ArrayList<>();
         PreparedStatement stmt = con.prepareStatement("select * from paciente where " + tipo + " = ?");
         stmt.setString(1, coisa);
         ResultSet rs = stmt.executeQuery();
-        while(rs.next())
-        {
+        while (rs.next()) {
             String id = rs.getString("id");
             String nome = rs.getString("nome");
             Calendar data1 = Calendar.getInstance();
@@ -108,5 +95,5 @@ public class PacienteDAO
             lista.add(obj);
         }
         return lista;
-    } 
+    }
 }

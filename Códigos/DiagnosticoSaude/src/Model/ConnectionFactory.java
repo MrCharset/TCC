@@ -6,9 +6,9 @@ import java.sql.Connection;
 public class ConnectionFactory 
 { 
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "pedro123";
     private static final String DATABASE = "diagnostico_de_saude";
-    private static final String HOST = "localhost";
+    private static final String HOST = "0.0.0.0";
 
     public static Connection getConnection() throws SQLException
     { 

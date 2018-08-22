@@ -12,6 +12,20 @@ public class ProblemaController
     {
         daoProblema = new ProblemaDAO();
     }
+    
+    public boolean add(Problema prob) throws SQLException {
+        return daoProblema.add(prob);
+    }
+
+    public boolean remove(String id) throws SQLException {
+        Problema tmp = new Problema();
+        tmp.setId(id);
+        return daoProblema.remove(tmp);
+    }
+
+    public boolean update(Problema enf) throws SQLException {
+        return daoProblema.update(enf);
+    }
 
     public boolean add(String id, String nome, String detalhes, String descricao) throws SQLException 
     {
@@ -35,6 +49,6 @@ public class ProblemaController
 
     public List<Problema> searchBySomething(String tipo, String coisa) throws SQLException 
     {
-        return daoProblema.searchBySomething(tipo, coisa);
+        return daoProblema.searchBy(tipo, coisa);
     }
 }

@@ -35,6 +35,6 @@ public class SolucaoController
 
     public List<Solucao> searchBy(String tipo, String coisa) throws SQLException 
     {
-        return daoSolucao.searchBySomething(tipo, coisa);
+        return daoSolucao.searchBy(tipo, coisa);
     }
 }
