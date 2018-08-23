@@ -1,31 +1,17 @@
 package View;
-
-import Dao.EnfermeiroDAO;
-import Dao.ProblemaDAO;
-import Dao.PacienteDAO;
-import Dao.DAO;
-import Controller.*;
-import Model.*;
+import Controller.EnfermeiroController;
+import Controller.PacienteController;
+import Controller.RelatorioController;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-public class DiagnosticoSaude {
-
-    public static void main(String[] args) throws SQLException {
-        Calendar c = Calendar.getInstance();
-
-        List<DAO> daos = new ArrayList<>();
-        daos.add(new EnfermeiroDAO());
-        daos.add(new PacienteDAO());
-        daos.add(new ProblemaDAO());
+public class DiagnosticoSaude 
+{
+    public static void main(String[] args) throws SQLException
+    {
         
-        DAO dao = new ProblemaDAO();
-       
-
         
     }
 }
