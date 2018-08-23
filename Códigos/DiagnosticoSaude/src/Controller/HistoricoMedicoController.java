@@ -3,7 +3,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.List;
 import Model.HistoricoMedico;
-import Model.HistoricoMedicoDAO;
+import Dao.HistoricoMedicoDAO;
 
 public class HistoricoMedicoController {
 

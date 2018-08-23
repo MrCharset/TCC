@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import Model.Paciente;
-import Model.PacienteDAO;
+import Dao.PacienteDAO;
 
 public class PacienteController {
 

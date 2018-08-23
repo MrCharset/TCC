@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import Model.Enfermeiro;
-import Model.EnfermeiroDAO;
+import Dao.EnfermeiroDAO;
 
 public class EnfermeiroController {
 

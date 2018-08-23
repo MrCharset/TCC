@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import Model.Consulta;
-import Model.ConsultaDAO;
+import Dao.ConsultaDAO;
 
 public class ConsultaController 
 {

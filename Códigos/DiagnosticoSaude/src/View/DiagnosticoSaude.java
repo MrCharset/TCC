@@ -1,5 +1,9 @@
 package View;
 
+import Dao.EnfermeiroDAO;
+import Dao.ProblemaDAO;
+import Dao.PacienteDAO;
+import Dao.DAO;
 import Controller.*;
 import Model.*;
 import java.sql.Date;

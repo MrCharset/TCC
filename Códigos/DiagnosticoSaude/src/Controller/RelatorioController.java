@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import Model.Relatorio;
-import Model.RelatorioDAO;
+import Dao.RelatorioDAO;
 
 public class RelatorioController {
 

@@ -1,5 +1,6 @@
-package Model;
+package Dao;
 
+import Model.Consulta;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.Calendar;

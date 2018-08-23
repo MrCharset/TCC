@@ -1,5 +1,6 @@
-package Model;
+package Dao;
 
+import Model.Relatorio;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;

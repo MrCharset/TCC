@@ -2,7 +2,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.List;
 import Model.Solucao;
-import Model.SolucaoDAO;
+import Dao.SolucaoDAO;
 
 public class SolucaoController 
 {

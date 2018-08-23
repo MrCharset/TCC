@@ -2,7 +2,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.List;
 import Model.Problema;
-import Model.ProblemaDAO;
+import Dao.ProblemaDAO;
 
 public class ProblemaController 
 {
