@@ -11,31 +11,33 @@ public class ProblemaDAO<Object> extends DAO<Problema> {
     public ProblemaDAO() throws SQLException {
         super();
     }
-    
-    
+
     @Override
     public boolean add(Problema modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into problema (id, nome, detalhes, descricao) values (?, ?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getNome());
-            stmt.setString(3, modelo.getDetalhes());
-            stmt.setString(4, modelo.getDescricao());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into problema (id, nome, detalhes, descricao) values (?, ?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getNome());
+        stmt.setString(3, modelo.getDetalhes());
+        stmt.setString(4, modelo.getDescricao());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Problema modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from problema where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("delete from problema where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
+
     }
 
     @Override
@@ -47,9 +49,9 @@ public class ProblemaDAO<Object> extends DAO<Problema> {
             stmt.setString(3, modelo.getDescricao());
             stmt.setString(4, modelo.getId());
             return stmt.executeUpdate() != 0;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     @Override
@@ -65,6 +67,7 @@ public class ProblemaDAO<Object> extends DAO<Problema> {
             Problema obj = new Problema(id, nome, detalhes, descricao);
             lista.add(obj);
         }
+
         return lista;
     }
 
@@ -82,6 +85,7 @@ public class ProblemaDAO<Object> extends DAO<Problema> {
             Problema obj = new Problema(id, nome, detalhes, descricao);
             lista.add(obj);
         }
+
         return lista;
     }
 }

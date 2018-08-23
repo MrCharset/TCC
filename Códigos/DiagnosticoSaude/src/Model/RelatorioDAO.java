@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RelatorioDAO<Object> extends DAO<Relatorio> {
-    
-    public RelatorioDAO() throws SQLException{
+
+    public RelatorioDAO() throws SQLException {
         super();
     }
 
@@ -19,41 +19,45 @@ public class RelatorioDAO<Object> extends DAO<Relatorio> {
     public boolean add(Relatorio modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into relatorio (id, conteudo, datahora, paciente) values (?, ?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getConteudo());
-            Calendar tmp3 = modelo.getDatahora();
-            stmt.setTimestamp(3, new Timestamp(tmp3.getTimeInMillis()));
-            stmt.setString(4, modelo.getPaciente());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into relatorio (id, conteudo, datahora, paciente) values (?, ?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getConteudo());
+        Calendar tmp3 = modelo.getDatahora();
+        stmt.setTimestamp(3, new Timestamp(tmp3.getTimeInMillis()));
+        stmt.setString(4, modelo.getPaciente());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Relatorio modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from relatorio where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("delete from relatorio where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
     }
 
     @Override
     public boolean update(Relatorio modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("update relatorio set conteudo = ?, datahora = ?, paciente = ? where id = ?");
-            stmt.setString(1, modelo.getConteudo());
-            Calendar tmp2 = modelo.getDatahora();
-            stmt.setTimestamp(2, new Timestamp(tmp2.getTimeInMillis()));
-            stmt.setString(3, modelo.getPaciente());
-            stmt.setString(4, modelo.getId());
-            return stmt.executeUpdate() != 0;
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("update relatorio set conteudo = ?, datahora = ?, paciente = ? where id = ?");
+        stmt.setString(1, modelo.getConteudo());
+        Calendar tmp2 = modelo.getDatahora();
+        stmt.setTimestamp(2, new Timestamp(tmp2.getTimeInMillis()));
+        stmt.setString(3, modelo.getPaciente());
+        stmt.setString(4, modelo.getId());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override

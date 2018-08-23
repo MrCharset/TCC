@@ -17,37 +17,40 @@ public class SolucaoDAO<Object> extends DAO<Solucao> {
     public boolean add(Solucao modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into solucao (id, nome, descricao) values (?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getNome());
-            stmt.setString(3, modelo.getDescricao());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into solucao (id, nome, descricao) values (?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getNome());
+        stmt.setString(3, modelo.getDescricao());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Solucao modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from solucao where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("delete from solucao where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
+
     }
 
     @Override
     public boolean update(Solucao modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("update solucao set nome = ?, descricao = ? where id = ?");
-            stmt.setString(1, modelo.getNome());
-            stmt.setString(2, modelo.getDescricao());
-            stmt.setString(3, modelo.getId());
-            return stmt.executeUpdate() != 0;
-        } else {
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+        
+        PreparedStatement stmt = con.prepareStatement("update solucao set nome = ?, descricao = ? where id = ?");
+        stmt.setString(1, modelo.getNome());
+        stmt.setString(2, modelo.getDescricao());
+        stmt.setString(3, modelo.getId());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override

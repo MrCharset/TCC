@@ -12,39 +12,45 @@ public class HistoricoMedicoDAO<Object> extends DAO<HistoricoMedico> {
     public HistoricoMedicoDAO() throws SQLException {
         super();
     }
+
     @Override
     public boolean add(HistoricoMedico modelo) throws SQLException {
         if (searchBy("paciente", modelo.getPaciente()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into historicomedico (paciente, dadosconsulta) values (?, ?)");
-            stmt.setString(1, modelo.getPaciente());
-            stmt.setString(2, modelo.getDadosConsulta());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into historicomedico (paciente, dadosconsulta) values (?, ?)");
+        stmt.setString(1, modelo.getPaciente());
+        stmt.setString(2, modelo.getDadosConsulta());
+        return stmt.executeUpdate() != 0;
+
     }
+
     @Override
     public boolean remove(HistoricoMedico modelo) throws SQLException {
-        if (searchBy("paciente", modelo.getPaciente()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from historicomedico where paciente = ?");
-            stmt.setString(1, modelo.getPaciente());
-            return stmt.execute();
-        } else {
+        if (searchBy("paciente", modelo.getPaciente()).isEmpty()) {
             return false;
         }
 
+        PreparedStatement stmt = con.prepareStatement("delete from historicomedico where paciente = ?");
+        stmt.setString(1, modelo.getPaciente());
+        return stmt.execute();
     }
+
     @Override
     public boolean update(HistoricoMedico modelo) throws SQLException {
-        if (searchBy("paciente", modelo.getPaciente()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("update historicomedico set dadosconsulta = ? where paciente = ?");
-            stmt.setString(1, modelo.getDadosConsulta());
-            stmt.setString(2, modelo.getPaciente());
-            return stmt.executeUpdate() != 0;
-        } else {
+        if (searchBy("paciente", modelo.getPaciente()).isEmpty()) {
             return false;
         }
+        
+        
+        PreparedStatement stmt = con.prepareStatement("update historicomedico set dadosconsulta = ? where paciente = ?");
+        stmt.setString(1, modelo.getDadosConsulta());
+        stmt.setString(2, modelo.getPaciente());
+        return stmt.executeUpdate() != 0;
+
     }
+
     @Override
     public List<HistoricoMedico> selectAll() throws SQLException {
         ArrayList<HistoricoMedico> lista = new ArrayList<>();
@@ -56,8 +62,10 @@ public class HistoricoMedicoDAO<Object> extends DAO<HistoricoMedico> {
             HistoricoMedico obj = new HistoricoMedico(paciente, dadosConsulta);
             lista.add(obj);
         }
+
         return lista;
     }
+
     @Override
     public List<HistoricoMedico> searchBy(String tipo, String coisa) throws SQLException {
         ArrayList<HistoricoMedico> lista = new ArrayList<>();

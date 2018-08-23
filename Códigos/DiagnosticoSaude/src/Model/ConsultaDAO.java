@@ -18,34 +18,36 @@ public class ConsultaDAO<Object> extends DAO<Consulta> {
     public boolean add(Consulta modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into consulta (id, enfermeiro, paciente, datahora, massacorporal, circabdominal, altura, glicemia, pressaoarterial, respiracao, temperatura, batimentocardio) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getEnfermeiro());
-            stmt.setString(3, modelo.getPaciente());
-            Calendar tmp4 = modelo.getDatahora();
-            stmt.setTimestamp(4, new Timestamp(tmp4.getTimeInMillis()));
-            stmt.setDouble(5, modelo.getMassaCorporal());
-            stmt.setDouble(6, modelo.getCircAbdominal());
-            stmt.setDouble(7, modelo.getAltura());
-            stmt.setDouble(8, modelo.getGlicemia());
-            stmt.setString(9, modelo.getPressaoArterial());
-            stmt.setInt(10, modelo.getRespiracao());
-            stmt.setDouble(11, modelo.getTemperatura());
-            stmt.setInt(12, modelo.getBatimentoCardio());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into consulta (id, enfermeiro, paciente, datahora, massacorporal, circabdominal, altura, glicemia, pressaoarterial, respiracao, temperatura, batimentocardio) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getEnfermeiro());
+        stmt.setString(3, modelo.getPaciente());
+        Calendar tmp4 = modelo.getDatahora();
+        stmt.setTimestamp(4, new Timestamp(tmp4.getTimeInMillis()));
+        stmt.setDouble(5, modelo.getMassaCorporal());
+        stmt.setDouble(6, modelo.getCircAbdominal());
+        stmt.setDouble(7, modelo.getAltura());
+        stmt.setDouble(8, modelo.getGlicemia());
+        stmt.setString(9, modelo.getPressaoArterial());
+        stmt.setInt(10, modelo.getRespiracao());
+        stmt.setDouble(11, modelo.getTemperatura());
+        stmt.setInt(12, modelo.getBatimentoCardio());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Consulta modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from consulta where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+        PreparedStatement stmt = con.prepareStatement("delete from consulta where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
+
     }
 
     @Override

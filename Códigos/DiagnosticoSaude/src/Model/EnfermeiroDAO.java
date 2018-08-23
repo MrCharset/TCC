@@ -19,45 +19,48 @@ public class EnfermeiroDAO<Object> extends DAO<Enfermeiro> {
     public boolean add(Enfermeiro modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into enfermeiro (id, nome, nascimento, sexo, login, senha) values (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getNome());
-            Calendar tmp3 = modelo.getNascimento();
-            stmt.setDate(3, new Date(tmp3.getTimeInMillis()));
-            stmt.setString(4, modelo.getSexo());
-            stmt.setString(5, modelo.getLogin());
-            stmt.setString(6, modelo.getSenha());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into enfermeiro (id, nome, nascimento, sexo, login, senha) values (?, ?, ?, ?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getNome());
+        Calendar tmp3 = modelo.getNascimento();
+        stmt.setDate(3, new Date(tmp3.getTimeInMillis()));
+        stmt.setString(4, modelo.getSexo());
+        stmt.setString(5, modelo.getLogin());
+        stmt.setString(6, modelo.getSenha());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Enfermeiro modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from enfermeiro where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("delete from enfermeiro where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
+
     }
 
     @Override
     public boolean update(Enfermeiro modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("update enfermeiro set nome = ?, nascimento = ?, sexo = ?, login = ?, senha = ? where id = ?");
-            stmt.setString(1, modelo.getNome());
-            Calendar tmp2 = modelo.getNascimento();
-            stmt.setDate(2, new Date(tmp2.getTimeInMillis()));
-            stmt.setString(3, modelo.getSexo());
-            stmt.setString(4, modelo.getLogin());
-            stmt.setString(5, modelo.getSenha());
-            stmt.setString(6, modelo.getId());
-            return stmt.executeUpdate() != 0;
-        } else {
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("update enfermeiro set nome = ?, nascimento = ?, sexo = ?, login = ?, senha = ? where id = ?");
+        stmt.setString(1, modelo.getNome());
+        Calendar tmp2 = modelo.getNascimento();
+        stmt.setDate(2, new Date(tmp2.getTimeInMillis()));
+        stmt.setString(3, modelo.getSexo());
+        stmt.setString(4, modelo.getLogin());
+        stmt.setString(5, modelo.getSenha());
+        stmt.setString(6, modelo.getId());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override

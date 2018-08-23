@@ -1,4 +1,3 @@
-
 package Model;
 
 import java.sql.PreparedStatement;
@@ -19,43 +18,48 @@ public class PacienteDAO<Object> extends DAO<Paciente> {
     public boolean add(Paciente modelo) throws SQLException {
         if (searchBy("id", modelo.getId()).size() > 0) {
             return false;
-        } else {
-            PreparedStatement stmt = con.prepareStatement("insert into paciente (id, nome, nascimento, sexo, enfermeiro) values (?, ?, ?, ?, ?)");
-            stmt.setString(1, modelo.getId());
-            stmt.setString(2, modelo.getNome());
-            Calendar tmp3 = modelo.getNascimento();
-            stmt.setDate(3, new Date(tmp3.getTimeInMillis()));
-            stmt.setString(4, modelo.getSexo());
-            stmt.setString(5, modelo.getEnfermeiro());
-            return stmt.executeUpdate() != 0;
         }
+
+        PreparedStatement stmt = con.prepareStatement("insert into paciente (id, nome, nascimento, sexo, enfermeiro) values (?, ?, ?, ?, ?)");
+        stmt.setString(1, modelo.getId());
+        stmt.setString(2, modelo.getNome());
+        Calendar tmp3 = modelo.getNascimento();
+        stmt.setDate(3, new Date(tmp3.getTimeInMillis()));
+        stmt.setString(4, modelo.getSexo());
+        stmt.setString(5, modelo.getEnfermeiro());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
     public boolean remove(Paciente modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("delete from paciente where id = ?");
-            stmt.setString(1, modelo.getId());
-            return stmt.execute();
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("delete from paciente where id = ?");
+        stmt.setString(1, modelo.getId());
+        return stmt.execute();
+
     }
 
     @Override
     public boolean update(Paciente modelo) throws SQLException {
-        if (searchBy("id", modelo.getId()).size() > 0) {
-            PreparedStatement stmt = con.prepareStatement("update paciente set nome = ?, nascimento = ?, sexo = ?, enfermeiro = ? where id = ?");
-            stmt.setString(1, modelo.getNome());
-            Calendar tmp2 = modelo.getNascimento();
-            stmt.setDate(2, new Date(tmp2.getTimeInMillis()));
-            stmt.setString(3, modelo.getSexo());
-            stmt.setString(4, modelo.getEnfermeiro());
-            stmt.setString(5, modelo.getId());
-            return stmt.executeUpdate() != 0;
-        } else {
+
+        if (searchBy("id", modelo.getId()).isEmpty()) {
             return false;
         }
+
+        PreparedStatement stmt = con.prepareStatement("update paciente set nome = ?, nascimento = ?, sexo = ?, enfermeiro = ? where id = ?");
+        stmt.setString(1, modelo.getNome());
+        Calendar tmp2 = modelo.getNascimento();
+        stmt.setDate(2, new Date(tmp2.getTimeInMillis()));
+        stmt.setString(3, modelo.getSexo());
+        stmt.setString(4, modelo.getEnfermeiro());
+        stmt.setString(5, modelo.getId());
+        return stmt.executeUpdate() != 0;
+
     }
 
     @Override
