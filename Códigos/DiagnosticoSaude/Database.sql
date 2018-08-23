@@ -20,9 +20,7 @@ create table if not exists paciente
 	id varchar(32) primary key,
     nome varchar(100) not null,
     nascimento date not null,
-    sexo varchar(1) not null,
-    enfermeiro varchar(32) not null,
-    foreign key (enfermeiro) references enfermeiro(id)
+    sexo varchar(1) not null
 );
 
 create table if not exists consulta

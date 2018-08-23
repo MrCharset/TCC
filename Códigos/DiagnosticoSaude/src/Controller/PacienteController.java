@@ -28,16 +28,16 @@ public class PacienteController {
         return daoPaciente.update(pac);
     }
 
-    public boolean add(String id, String nome, Calendar nascimento, String sexo, String enfermeiro) throws SQLException {
-        return daoPaciente.add(new Paciente(id, nome, nascimento, sexo, enfermeiro));
+    public boolean add(String id, String nome, Calendar nascimento, String sexo) throws SQLException {
+        return daoPaciente.add(new Paciente(id, nome, nascimento, sexo));
     }
 
-    public boolean remove(String id, String nome, Calendar nascimento, String sexo, String enfermeiro) throws SQLException {
-        return daoPaciente.remove(new Paciente(id, nome, nascimento, sexo, enfermeiro));
+    public boolean remove(String id, String nome, Calendar nascimento, String sexo) throws SQLException {
+        return daoPaciente.remove(new Paciente(id, nome, nascimento, sexo));
     }
 
-    public boolean update(String id, String nome, Calendar nascimento, String sexo, String enfermeiro) throws SQLException {
-        return daoPaciente.update(new Paciente(id, nome, nascimento, sexo, enfermeiro));
+    public boolean update(String id, String nome, Calendar nascimento, String sexo) throws SQLException {
+        return daoPaciente.update(new Paciente(id, nome, nascimento, sexo));
     }
 
     public List<Paciente> selectAll() throws SQLException {

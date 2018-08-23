@@ -21,13 +21,12 @@ public class PacienteDAO<Object> extends DAO<Paciente> {
             return false;
         }
 
-        PreparedStatement stmt = con.prepareStatement("insert into paciente (id, nome, nascimento, sexo, enfermeiro) values (?, ?, ?, ?, ?)");
+        PreparedStatement stmt = con.prepareStatement("insert into paciente (id, nome, nascimento, sexo) values (?, ?, ?, ?)");
         stmt.setString(1, modelo.getId());
         stmt.setString(2, modelo.getNome());
         Calendar tmp3 = modelo.getNascimento();
         stmt.setDate(3, new Date(tmp3.getTimeInMillis()));
         stmt.setString(4, modelo.getSexo());
-        stmt.setString(5, modelo.getEnfermeiro());
         return stmt.executeUpdate() != 0;
 
     }
@@ -52,12 +51,11 @@ public class PacienteDAO<Object> extends DAO<Paciente> {
             return false;
         }
 
-        PreparedStatement stmt = con.prepareStatement("update paciente set nome = ?, nascimento = ?, sexo = ?, enfermeiro = ? where id = ?");
+        PreparedStatement stmt = con.prepareStatement("update paciente set nome = ?, nascimento = ?, sexo = ? where id = ?");
         stmt.setString(1, modelo.getNome());
         Calendar tmp2 = modelo.getNascimento();
         stmt.setDate(2, new Date(tmp2.getTimeInMillis()));
         stmt.setString(3, modelo.getSexo());
-        stmt.setString(4, modelo.getEnfermeiro());
         stmt.setString(5, modelo.getId());
         return stmt.executeUpdate() != 0;
 
@@ -75,8 +73,7 @@ public class PacienteDAO<Object> extends DAO<Paciente> {
             data1.setTime(rs.getDate("nascimento"));
             Calendar nascimento = data1;
             String sexo = rs.getString("sexo");
-            String enfermeiro = rs.getString("enfermeiro");
-            Paciente obj = new Paciente(id, nome, nascimento, sexo, enfermeiro);
+            Paciente obj = new Paciente(id, nome, nascimento, sexo);
             lista.add(obj);
         }
         return lista;
@@ -95,8 +92,7 @@ public class PacienteDAO<Object> extends DAO<Paciente> {
             data1.setTime(rs.getDate("nascimento"));
             Calendar nascimento = data1;
             String sexo = rs.getString("sexo");
-            String enfermeiro = rs.getString("enfermeiro");
-            Paciente obj = new Paciente(id, nome, nascimento, sexo, enfermeiro);
+            Paciente obj = new Paciente(id, nome, nascimento, sexo);
             lista.add(obj);
         }
         return lista;

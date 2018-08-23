@@ -9,14 +9,13 @@ public class Paciente {
     private String nome;
     private Calendar nascimento;
     private String sexo;
-    private String enfermeiro;
+   
 
-    public Paciente(String id, String nome, Calendar nascimento, String sexo, String enfermeiro) {
+    public Paciente(String id, String nome, Calendar nascimento, String sexo) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
         this.sexo = sexo;
-        this.enfermeiro = enfermeiro;
     }
 
     public Paciente() {
@@ -54,11 +53,5 @@ public class Paciente {
         this.sexo = sexo;
     }
 
-    public String getEnfermeiro() {
-        return this.enfermeiro;
-    }
-
-    public void setEnfermeiro(String enfermeiro) {
-        this.enfermeiro = enfermeiro;
-    }
+    
 }
