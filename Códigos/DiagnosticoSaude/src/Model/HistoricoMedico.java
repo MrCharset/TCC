@@ -1,7 +1,7 @@
 package Model;
 
-public class HistoricoMedico 
-{ 
+public class HistoricoMedico {
+
     private String paciente;
     private String dadosConsulta;
 
@@ -10,19 +10,23 @@ public class HistoricoMedico
         this.dadosConsulta = dadosConsulta;
     }
 
-    public String getPaciente() { 
+    public HistoricoMedico() {
+
+    }
+
+    public String getPaciente() {
         return this.paciente;
-    } 
+    }
 
-    public void setPaciente(String paciente) { 
+    public void setPaciente(String paciente) {
         this.paciente = paciente;
-    } 
+    }
 
-    public String getDadosConsulta() { 
+    public String getDadosConsulta() {
         return this.dadosConsulta;
-    } 
+    }
 
-    public void setDadosConsulta(String dadosConsulta) { 
+    public void setDadosConsulta(String dadosConsulta) {
         this.dadosConsulta = dadosConsulta;
-    } 
-} 
+    }
+}

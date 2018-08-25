@@ -2,7 +2,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.List;
 import Model.Solucao;
-import Model.SolucaoDAO;
+import Dao.SolucaoDAO;
 
 public class SolucaoController 
 {
@@ -35,6 +35,6 @@ public class SolucaoController
 
     public List<Solucao> searchBy(String tipo, String coisa) throws SQLException 
     {
-        return daoSolucao.searchBySomething(tipo, coisa);
+        return daoSolucao.searchBy(tipo, coisa);
     }
 }

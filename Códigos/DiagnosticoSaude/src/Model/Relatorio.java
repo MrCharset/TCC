@@ -1,8 +1,9 @@
 package Model;
+
 import java.util.Calendar;
 
-public class Relatorio 
-{ 
+public class Relatorio {
+
     private String id;
     private String conteudo;
     private Calendar datahora;
@@ -15,35 +16,39 @@ public class Relatorio
         this.paciente = paciente;
     }
 
-    public String getId() { 
+    public Relatorio() {
+
+    }
+
+    public String getId() {
         return this.id;
-    } 
+    }
 
-    public void setId(String id) { 
+    public void setId(String id) {
         this.id = id;
-    } 
+    }
 
-    public String getConteudo() { 
+    public String getConteudo() {
         return this.conteudo;
-    } 
+    }
 
-    public void setConteudo(String conteudo) { 
+    public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
-    } 
+    }
 
-    public Calendar getDatahora() { 
+    public Calendar getDatahora() {
         return this.datahora;
-    } 
+    }
 
-    public void setDatahora(Calendar datahora) { 
+    public void setDatahora(Calendar datahora) {
         this.datahora = datahora;
-    } 
+    }
 
-    public String getPaciente() { 
+    public String getPaciente() {
         return this.paciente;
-    } 
+    }
 
-    public void setPaciente(String paciente) { 
+    public void setPaciente(String paciente) {
         this.paciente = paciente;
-    } 
+    }
 }

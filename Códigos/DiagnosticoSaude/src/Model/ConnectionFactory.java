@@ -12,6 +12,6 @@ public class ConnectionFactory
 
     public static Connection getConnection() throws SQLException
     { 
-        return DriverManager.getConnection("jdbc:mysql://"+ConnectionFactory.HOST+"/"+ConnectionFactory.DATABASE+"?useSSL=false", ConnectionFactory.USER, ConnectionFactory.PASSWORD);
+        return DriverManager.getConnection("jdbc:mysql://"+ConnectionFactory.HOST+"/"+ConnectionFactory.DATABASE, ConnectionFactory.USER, ConnectionFactory.PASSWORD);
     }
 }

@@ -15,7 +15,10 @@ public class Consulta
     private int respiracao;
     private double temperatura;
     private int batimentoCardio;
-
+    
+    public Consulta(){
+        
+    }
     public Consulta(String id, String enfermeiro, String paciente, Calendar datahora, double massaCorporal, double circAbdominal, double altura, double glicemia, String pressaoArterial, int respiracao, double temperatura, int batimentoCardio) {
         this.id = id;
         this.enfermeiro = enfermeiro;

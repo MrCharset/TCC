@@ -1,34 +1,50 @@
 package View;
+
 import Controller.EnfermeiroController;
 import Controller.PacienteController;
 import Controller.RelatorioController;
+import Dao.DAO;
+import Dao.EnfermeiroDAO;
+import Dao.PacienteDAO;
+import Model.Enfermeiro;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.*;
 
-public class DiagnosticoSaude 
-{
-    public static void main(String[] args) throws SQLException
-    {
-        Calendar c = Calendar.getInstance();
-        
-        EnfermeiroController ec = new EnfermeiroController();
-        c.set(2002, 6, 18); //mês começa no zero
-        ec.add("enf", "nome", c, "m", "login", "senha");
-        c = ec.selectAll().get(0).getNascimento();
-        System.out.println(new Date(c.getTimeInMillis()));
-        
-        PacienteController pc = new PacienteController();
-        c.set(2001, 6, 7); //mês começa no zero
-        pc.add("pac", "nome", c, "f", "enf");
-        c = pc.selectAll().get(0).getNascimento();
-        System.out.println(new Date(c.getTimeInMillis()));
-        
-        RelatorioController rc = new RelatorioController();
-        c.set(2015, 11, 20, 10, 34, 59); //mês começa no zero
-        rc.add("rel", "conteudo", c, "pac");
-        c = rc.selectAll().get(0).getDatahora();
-        System.out.println(new Timestamp(c.getTimeInMillis()));
+public class DiagnosticoSaude {
+
+    public static void main(String[] args) throws SQLException {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginForm().setVisible(true);
+            }
+        });
+
     }
 }

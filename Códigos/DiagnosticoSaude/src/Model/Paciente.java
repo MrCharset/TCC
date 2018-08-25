@@ -1,9 +1,10 @@
 package Model;
+
 import java.sql.Date;
 import java.util.Calendar;
 
-public class Paciente 
-{ 
+public class Paciente {
+
     private String id;
     private String nome;
     private Calendar nascimento;
@@ -18,43 +19,46 @@ public class Paciente
         this.enfermeiro = enfermeiro;
     }
 
-    public String getId() { 
+    public Paciente() {
+    }
+
+    public String getId() {
         return this.id;
-    } 
+    }
 
-    public void setId(String id) { 
+    public void setId(String id) {
         this.id = id;
-    } 
+    }
 
-    public String getNome() { 
+    public String getNome() {
         return this.nome;
     }
 
-    public void setNome(String nome) { 
+    public void setNome(String nome) {
         this.nome = nome;
-    } 
+    }
 
-    public Calendar getNascimento() { 
+    public Calendar getNascimento() {
         return this.nascimento;
-    } 
+    }
 
-    public void setNascimento(Calendar nascimento) { 
+    public void setNascimento(Calendar nascimento) {
         this.nascimento = nascimento;
-    } 
+    }
 
-    public String getSexo() { 
+    public String getSexo() {
         return this.sexo;
-    } 
+    }
 
-    public void setSexo(String sexo) { 
+    public void setSexo(String sexo) {
         this.sexo = sexo;
-    } 
+    }
 
-    public String getEnfermeiro() { 
+    public String getEnfermeiro() {
         return this.enfermeiro;
-    } 
+    }
 
-    public void setEnfermeiro(String enfermeiro) { 
+    public void setEnfermeiro(String enfermeiro) {
         this.enfermeiro = enfermeiro;
-    } 
-} 
+    }
+}
