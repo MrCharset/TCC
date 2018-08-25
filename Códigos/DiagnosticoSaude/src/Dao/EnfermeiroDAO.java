@@ -103,4 +103,43 @@ public class EnfermeiroDAO<Object> extends DAO<Enfermeiro> {
         }
         return lista;
     }
+
+    public List<Enfermeiro> searchBy(String[] campos, String[] valores) throws SQLException {
+        ArrayList<Enfermeiro> lista = new ArrayList<>();
+        String query = "select * from enfermeiro where ";
+        int i = 1;
+        for (String campo : campos) {
+            if (i == 2) {
+                query += "and ";
+                i = 1;
+            }
+            query += campo + " = ? ";
+            i++;
+
+        }
+
+        
+        PreparedStatement stmt = con.prepareStatement(query);
+
+        int k = 1;
+        for (String valor : valores) {
+            stmt.setString(k, valor);
+            k++;
+        }
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            String id = rs.getString("id");
+            String nome = rs.getString("nome");
+            Calendar data1 = Calendar.getInstance();
+            data1.setTime(rs.getDate("nascimento"));
+            Calendar nascimento = data1;
+            String sexo = rs.getString("sexo");
+            String login = rs.getString("login");
+            String senha = rs.getString("senha");
+            Enfermeiro obj = new Enfermeiro(id, nome, nascimento, sexo, login, senha);
+            lista.add(obj);
+        }
+        return lista;
+    }
 }
